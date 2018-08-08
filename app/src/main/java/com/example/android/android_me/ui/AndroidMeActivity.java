@@ -33,31 +33,31 @@ public class AndroidMeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_me);
 
-        BodyPartFragment headFragment = new BodyPartFragment();
-        BodyPartFragment bodyFragment = new BodyPartFragment();
-        BodyPartFragment legFragment = new BodyPartFragment();
+        if (savedInstanceState == null) {
+            BodyPartFragment headFragment = new BodyPartFragment();
 
-        headFragment.setmImageIds(AndroidImageAssets.getHeads());
-        headFragment.setmListIndex(1);
+            headFragment.setmImageIds(AndroidImageAssets.getHeads());
+            headFragment.setmListIndex(1);
 
-        bodyFragment.setmImageIds(AndroidImageAssets.getBodies());
-        bodyFragment.setmListIndex(2);
+            FragmentManager fragmentManager = getFragmentManager();
 
-        legFragment.setmImageIds(AndroidImageAssets.getLegs());
-        legFragment.setmListIndex(3);
-
-        FragmentManager fragmentManager = getFragmentManager();
-
-        fragmentManager.beginTransaction()
-                .add(R.id.head_container, headFragment)
-                .commit();
+            fragmentManager.beginTransaction()
+                    .add(R.id.head_container, headFragment)
+                    .commit();
 //
-        fragmentManager.beginTransaction()
-                .add(R.id.body_container, bodyFragment)
-                .commit();
+            BodyPartFragment bodyFragment = new BodyPartFragment();
+            bodyFragment.setmImageIds(AndroidImageAssets.getBodies());
+            fragmentManager.beginTransaction()
+                    .add(R.id.body_container, bodyFragment)
+                    .commit();
 
-        fragmentManager.beginTransaction()
-                .add(R.id.leg_container, legFragment)
-                .commit();
+            BodyPartFragment legFragment = new BodyPartFragment();
+            legFragment.setmImageIds(AndroidImageAssets.getLegs());
+            fragmentManager.beginTransaction()
+                    .add(R.id.leg_container, legFragment)
+                    .commit();
+        }
     }
+
+
 }
